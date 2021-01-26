@@ -17,7 +17,12 @@ class App extends Component {
   }
 
   render() {
-    return <div>{this.state.message}</div>;
+    return (
+    <div>
+      <p>Server running</p>
+      {this.state.message}
+    </div>
+    );
   }
 }
 
