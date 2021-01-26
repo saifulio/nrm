@@ -1,4 +1,4 @@
-FROM node:10.8.0
+FROM node:14.15.4
 
 RUN mkdir -p /opt/app
 
@@ -13,7 +13,13 @@ ENV PATH /opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
 COPY . /opt/app
 
-RUN chmod +x ./wait-for.sh
-CMD sh -c './wait-for.sh mysql-db:3306 -- sequelize db:migrate && nodemon index.js'
+# ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
+# RUN chmod +x /wait
+# RUN chmod +x ./wait-for.sh
+
+ADD https://raw.githubusercontent.com/mrako/wait-for/master/wait-for /wait-for
+RUN chmod +x /wait-for
+
+CMD sh -c '/wait-for mysql-db:3306 -- sequelize db:migrate && nodemon index.js'
 
 EXPOSE 5000

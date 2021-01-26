@@ -23,7 +23,7 @@ function connectToDatabase() {
   const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
     host: dbConfig.host,
     dialect: dbConfig.dialect,
-    operatorsAliases: false,
+    operatorsAliases: 0,
     pool: {
       max: 5,
       min: 0,
@@ -38,7 +38,7 @@ function connectToDatabase() {
       console.log("Connection has been established successfully.");
 
       //Check if database was seeded already, and do it if needed
-      User.findById(1).then(user => {
+      User.findByPk(1).then(user => {
         if (!user) {
           console.log("Database is not seeded, will run seeds now...");
           const { exec } = require("child_process");
