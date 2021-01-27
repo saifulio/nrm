@@ -4,6 +4,7 @@
     "password": "dbuserpwd",
     "database": "boilerplate_db",
     "host": "mysql-db",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   }
 }
